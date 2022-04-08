@@ -3,7 +3,6 @@ require "header.php";
 ?>
 
 <head>
-    <link rel="icon" href="img/favicon.ico" type="image/ico">
     <link rel="stylesheet" href="css/main-style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

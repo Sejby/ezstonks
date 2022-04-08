@@ -7,9 +7,9 @@ if (isset($_POST["addpost-submit"])) {
     $text = $_POST['text'];
     $user = $_SESSION["userId"];
 
-    include "../classes/dbh.class.php";
-    include "../classes/addpost.class.php";
-    include "../controls/addpost.control.php";
+    include "../models/dbh.class.php";
+    include "../models/addpost.class.php";
+    include "../controllers/addpost.control.php";
     $addpost = new AddPostControl($tema, $text, $user);
 
     $addpost->getPost();

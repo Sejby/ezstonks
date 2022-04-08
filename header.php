@@ -1,12 +1,13 @@
 <?php
-    session_start();
-    include "./php/includes/addcomment.inc.php";
+session_start();
+include "./php/includes/addcomment.inc.php";
 ?>
 <!DOCTYPE html>
 <html lang="cs">
 
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="img/favicon.ico" type="image/ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/header-style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -33,7 +34,6 @@
                 <form action="./php/includes/logout.inc.php" method="post">
                 <button type="submit" class="btn btn-danger" name="logout-submit">Log Out</button>
                 </form>';
-                
             } else {
                 echo '
                         <form action="./php/includes/login.inc.php" method="post">
