@@ -463,3 +463,7 @@ h1 {
 .commentSection textarea{
   resize: vertical;
 }
+
+.emoji-picker{
+  padding-right: 10px;
+}

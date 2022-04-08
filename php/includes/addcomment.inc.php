@@ -87,14 +87,16 @@ if (isset($_POST['addComment'])) {
         $comment = $conn->real_escape_string($_POST['comment']);
         $isReply = $conn->real_escape_string($_POST['isReply']);
         $commentID = $conn->real_escape_string($_POST['commentID']);
-        
+        $idNews = $_POST["idNews"];
+
+
 
 
         if ($isReply != 'false') {
             $conn->query("INSERT INTO replies (comment, commentID, userID, createdOn) VALUES ('$comment', '$commentID', '" . $_SESSION['userId'] . "', NOW())");
             $sql = $conn->query("SELECT replies.id, uidUsers, comment, replies.createdOn FROM replies INNER JOIN users ON replies.userID = users.idUsers ORDER BY replies.id DESC LIMIT 1");
         } else {
-            $conn->query("INSERT INTO comments (userID, comment, createdOn, idNews) VALUES ('" . $_SESSION['userId'] . "','$comment',NOW(), $idZpravy)");
+            $conn->query("INSERT INTO comments (userID, comment, createdOn, idNews) VALUES ('" . $_SESSION['userId'] . "','$comment',NOW(), $idNews)");
             $sql = $conn->query("SELECT comments.id, uidUsers, comment, comments.createdOn FROM comments INNER JOIN users ON comments.userID = users.idUsers ORDER BY comments.id DESC LIMIT 1");
         }
 

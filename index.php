@@ -3,9 +3,11 @@ require "header.php";
 ?>
 
 <head>
+    <link rel="icon" href="img/favicon.ico" type="image/ico">
     <link rel="stylesheet" href="css/main-style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="emojilib/css/emoji.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Jost&display=swap" rel="stylesheet">
@@ -115,7 +117,6 @@ require "header.php";
     </div>
 
     <div id="content">
-        <i class="fa-solid fa-arrow-down-right"></i>
         <?php
 
         if (isset($_SESSION['userId'])) {
@@ -148,21 +149,6 @@ require "header.php";
                     while ($row = $stmt->fetch()) {
 
                         echo '<div class="prispevek">';
-
-                        if (isset($_SESSION['userId'])) {
-                            echo '
-                    <div class="vote-button">
-                    <form action="includes/addlike.inc.php" method="post"><button type="submit" value=' . $id . ' name="addlike"><i class="fas fa-thumbs-up like"></i> </button> </form> <h3>' . $likes . '</h3>
-                    <form action="includes/adddislike.inc.php" method="post"> <button type="submit" value=' . $id . ' name="adddislike"> <i class="fas fa-thumbs-down dislike"></i> </button> </form>
-                    </div>  ';
-                        } else {
-                            echo '
-                    <div class="vote-button">
-                    <form action="includes/likecannotbeadded.php" method="post"><button type="submit" value=' . $id . ' name="riplike"><i class="fas fa-thumbs-up like"></i> </button> </form> <h3>' . $likes . '</h3>
-                    <form action="includes/likecannotbeadded.php" method="post"><button type="submit" value=' . $id . ' name="riplike"> <i class="fas fa-thumbs-down dislike"></i> </button> </form>
-                    </div>';
-                        }
-
                         echo '<div class="content">';
                         if (isset($_SESSION['userUId'])) {
                             if ($user == $_SESSION['userUId']) {
@@ -211,12 +197,18 @@ require "header.php";
     </div>
 
 
+    <script src="emojilib/js/config.js"></script>
+    <script src="emojilib/js/util.js"></script>
+    <script src="emojilib/js/jquery.emojiarea.js"></script>
+    <script src="emojilib/js/emoji-picker.js"></script>
     <script src="js/jquery.timeago.js"></script>
     <script src="js/API.js"></script>
     <script type="text/javascript">
         var isReply = false,
             commentID = 0,
             max = <?php echo $numComments ?>;
+        var idNews = $(".hiddenval").attr('value');
+
 
         $(document).ready(function() {
             $("#addComment, #addReply").on('click', function() {
@@ -236,7 +228,8 @@ require "header.php";
                             addComment: 1,
                             comment: comment,
                             isReply: isReply,
-                            commentID: commentID
+                            commentID: commentID,
+                            idNews: idNews
                         },
                         success: function(response) {
                             max++;
@@ -339,6 +332,15 @@ require "header.php";
                 }
             });
         }
+
+        $(function() {
+            window.emojiPicker = new EmojiPicker({
+                emojiable_selector: '[data-emojiable=true]',
+                assetsPath: 'emojilib/img/',
+                popupButtonClasses: 'fa fa-smile-o'
+            });
+            window.emojiPicker.discover();
+        });
     </script>
 </body>
 
