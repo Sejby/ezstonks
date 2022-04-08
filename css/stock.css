@@ -1,0 +1,25 @@
+
+#container{
+    width: 100%;
+    padding-top: 2%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#graf{
+    width: 75%;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+#text{
+    padding-left: 15%;
+}
+
+#text h1{
+    color: rgb(0, 117, 190);
+}
+
+#text h3{
+    font-weight: bold;
+}
