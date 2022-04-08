@@ -250,7 +250,7 @@ require "header.php";
                         }
                     });
                 } else
-                    alert('Error: Check your input!');
+                    alert('Error: Check your comment length!');
             });
             getAllComments(0, max);
             getAllUserReactions();

@@ -73,22 +73,21 @@ class API extends DBH
           <div class="comments">
           <div class="row">
               <div class="col-md-12">
-                  <textarea class="form-control" id="mainComment" placeholder="Add Comment..." cols="30" rows="2" data-emojiable="true" data-emoji-input="unicode"></textarea><br>
-                  <button style="float:right" class="btn-primary btn" onclick="isReply = false;" id="addComment">Add Comment</button>
+                  <textarea class="form-control" id="mainComment" placeholder="Add Comment..." cols="30" rows="2" data-emojiable="true" data-emoji-input="unicode"></textarea>
+                  <button style="float:right; margin-top: 10px;" class="btn-primary btn" onclick="isReply = false;" id="addComment">Add Comment</button>
               </div>
 
               <div class="col-md-12">
                   <div class="userComments">
                   </div>
-              </div>
+                  <div class="row replyRow" style="display:none">
+          <div class="col-md-12">
+              <textarea class="form-control" id="replyComment" placeholder="Add Public Comment" cols="30" rows="2" data-emojiable="true" data-emoji-input="unicode"></textarea>
+              <button style="float:right; margin-left: 5px;" class="btn-success btn" onclick="isReply = true;" id="addReply">Add Reply</button>
+              <button style="float:right;" class="btn-default btn" onclick="$(".replyRow").css("display", "none");">Close</button>
           </div>
       </div>
-
-      <div class="row replyRow" style="display:none">
-          <div class="col-md-12">
-              <textarea class="form-control" id="replyComment" placeholder="Add Public Comment" cols="30" rows="2" data-emojiable="true" data-emoji-input="unicode"></textarea><br>
-              <button style="float:right; margin-left: 5px;" class="btn-success btn" onclick="isReply = true;" id="addReply">Add Reply</button>
-              <button style="float:right;" class="btn-default btn" onclick="$(".replyRow").hide();">Close</button>
+              </div>
           </div>
       </div>
           </div>
