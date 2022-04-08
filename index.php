@@ -139,12 +139,12 @@ require "header.php";
 
         <?php
         $mysqli = new mysqli('localhost', 'root', '', 'ezstonks');
-        $sql = "SELECT idPosts, idUsers, topic, postText, date ,likes FROM posty ORDER BY date DESC;";
+        $sql = "SELECT idPosts, idUsers, topic, postText, date FROM posty ORDER BY date DESC;";
         if ($stmt = $mysqli->prepare($sql)) {
             if ($stmt->execute()) {
                 $stmt->store_result();
                 if ($stmt->num_rows > 0) {
-                    $stmt->bind_result($id, $date, $user, $topic, $text, $likes);
+                    $stmt->bind_result($id, $date, $user, $topic, $text);
                     while ($row = $stmt->fetch()) {
 
                         echo '<div class="prispevek">';
@@ -342,6 +342,10 @@ require "header.php";
             });
             window.emojiPicker.discover();
         });
+
+        function closeFunction(){
+            $('.replyRow').hide();
+        }
     </script>
 </body>
 
