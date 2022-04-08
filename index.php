@@ -237,9 +237,11 @@ require "header.php";
                             if (!isReply) {
                                 $(".userComments").prepend(response);
                                 $("#mainComment").val("");
+                                $('.emoji-wysiwyg-editor').empty();
                             } else {
                                 commentID = 0;
                                 $("#replyComment").val("");
+                                $('.emoji-wysiwyg-editor').empty();
                                 $(".replyRow").hide();
                                 $('.replyRow').parent().next().prepend(response);
                             }

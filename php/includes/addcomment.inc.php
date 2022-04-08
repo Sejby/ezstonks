@@ -24,7 +24,7 @@ function createCommentRow($data, $isReply = false)
                 <div class="reply">
                     <i class="fas fa-thumbs-up" data-isReply="' . $isReply . '" onclick="react(this,' . $data['id'] . ', \'up\')"></i>
                     <i class="fas fa-thumbs-down" data-isReply="' . $isReply . '" onclick="react(this,' . $data['id'] . ', \'down\')"></i>
-                    <a href="javascript:void(0)" data-commentID="' . $data['id'] . '" onclick="reply(this)">REPLY</a>
+                    <a href="javascript:void(0)" data-commentID="' . $data['id'] . '" onclick="reply(this)"><i class="fa-solid fa-reply"></i></a>
                 </div>
                 <div class="replies">';
 
