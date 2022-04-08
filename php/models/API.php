@@ -55,16 +55,15 @@ class API extends DBH
     }
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    for ($i = 0; $i < 4; $i++) {
-      $time = date("d/m/Y H:i", strtotime($data[$i]["date"]));
-      echo '
+    $time = date("d/m/Y H:i", strtotime($data[0]["date"]));
+    echo '
         <div class="zprava">
           <div class="obsah">
             <div class="wrapper">
-            <span class="label label-info">' . $data[$i]["category"] . '</span>
-              <h1>' . $data[$i]["nadpis"] . '</h1>
-              <img src="' . $data[$i]["img_url"] . '">
-              <p class="text">' . $data[$i]["text"] . '</p>
+            <span class="label label-info">' . $data[0]["category"] . '</span>
+              <h1>' . $data[0]["nadpis"] . '</h1>
+              <img src="' . $data[0]["img_url"] . '">
+              <p class="text">' . $data[0]["text"] . '</p>
               <p class="datum">Added on: ' . $time . '</p>
             </div>
           </div>
@@ -78,7 +77,6 @@ class API extends DBH
               </div>
 
               <div class="col-md-12">
-                  <h2><b id="numComments">. X Comments</b></h2>
                   <div class="userComments">
                   </div>
               </div>
@@ -88,14 +86,13 @@ class API extends DBH
       <div class="row replyRow" style="display:none">
           <div class="col-md-12">
               <textarea class="form-control" id="replyComment" placeholder="Add Public Comment" cols="30" rows="2"></textarea><br>
-              <button style="float:right" class="btn-primary btn" onclick="isReply = true;" id="addReply">Add Reply</button>
-              <button style="float:right" class="btn-default btn" onclick="$(".replyRow").hide();">Close</button>
+              <button style="float:right; margin-left: 5px;" class="btn-success btn" onclick="isReply = true;" id="addReply">Add Reply</button>
+              <button style="float:right;" class="btn-default btn" onclick="$(".replyRow").hide();">Close</button>
           </div>
       </div>
           </div>
         </div>';
-      $stmt = null;
-    }
+    $stmt = null;
   }
 
   public function vypisKomentare()

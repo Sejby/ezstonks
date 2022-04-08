@@ -3,7 +3,6 @@ require "header.php";
 ?>
 
 <head>
-    <link rel="icon" href="./img/favicon.ico">
     <link rel="stylesheet" href="css/main-style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -132,28 +131,8 @@ require "header.php";
         }
 
         include "./php/models/API.php";
-        ?><div class="comments">
-            <div class="row">
-                <div class="col-md-12">
-                    <textarea class="form-control" id="mainComment" placeholder="Add Comment..." cols="30" rows="2"></textarea><br>
-                    <button style="float:right" class="btn-primary btn" onclick="isReply = false;" id="addComment">Add Comment</button>
-                </div>
+        ?>
 
-                <div class="col-md-12">
-                    <h2><b id="numComments"><?php echo $numComments ?> Comments</b></h2>
-                    <div class="userComments">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row replyRow" style="display:none">
-            <div class="col-md-12">
-                <textarea class="form-control" id="replyComment" placeholder="Add Public Comment" cols="30" rows="2"></textarea><br>
-                <button style="float:right" class="btn-primary btn" onclick="isReply = true;" id="addReply">Add Reply</button>
-                <button style="float:right" class="btn-default btn" onclick="$('.replyRow').hide();">Close</button>
-            </div>
-        </div>
     </div>
 
     <div id="posts">
@@ -248,7 +227,7 @@ require "header.php";
                 else
                     comment = $("#replyComment").val();
 
-                if (comment.length > 5) {
+                if (comment.length > 3) {
                     $.ajax({
                         url: 'index.php',
                         method: 'POST',
@@ -270,7 +249,7 @@ require "header.php";
                                 commentID = 0;
                                 $("#replyComment").val("");
                                 $(".replyRow").hide();
-                                $('.replyRow').parent().next().append(response);
+                                $('.replyRow').parent().next().prepend(response);
                             }
 
                             calcTimeAgo();
