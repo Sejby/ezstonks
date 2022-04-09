@@ -84,7 +84,7 @@ class API extends DBH
           <div class="col-md-12">
               <textarea class="form-control" id="replyComment" placeholder="Add Public Comment" cols="30" rows="2" data-emojiable="true" data-emoji-input="unicode"></textarea>
               <button style="float:right; margin-left: 5px;" class="btn-success btn" onclick="isReply = true;" id="addReply">Add Reply</button>
-              <button style="float:right" class="btn-default btn" onclick="closeFunction()" > Close </button>
+              <button style="float:right" class="btn-default btn" onclick="closeFunction()"> Close </button>
           </div>
       </div>
               </div>

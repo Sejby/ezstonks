@@ -144,13 +144,13 @@ require "header.php";
             if ($stmt->execute()) {
                 $stmt->store_result();
                 if ($stmt->num_rows > 0) {
-                    $stmt->bind_result($id, $date, $user, $topic, $text);
+                    $stmt->bind_result($id, $user, $topic, $text, $date);
                     while ($row = $stmt->fetch()) {
 
                         echo '<div class="prispevek">';
                         echo '<div class="content">';
-                        if (isset($_SESSION['userUId'])) {
-                            if ($user == $_SESSION['userUId']) {
+                        if (isset($_SESSION['userId'])) {
+                            if ($user == $_SESSION['userId']) {
                                 echo '
                         <div id="formystlacitkama">
                         <form method="post" action="changepost.php" id="formsbuttonama1">
@@ -164,7 +164,7 @@ require "header.php";
                         ';
                             }
                         }
-                        echo '<h3 class="jmenouzivatele">' . $topic . '</h3>
+                        echo '<h3 class="nadpisPrispevku">' . $topic . '</h3>
                         <p class="textuzivatele">' . $text . '</p>          
                         <h3 class="datum">Přidáno: ' . $date . '</h3>
                         <h3 class="autor">Autor: ' . $user . '</h3>
@@ -205,7 +205,8 @@ require "header.php";
     <script type="text/javascript">
         var isReply = false,
             commentID = 0,
-            max = <?php echo $numComments ?>;
+            max = <?php echo $numComments ?>,
+            userId = <?php echo $_SESSION["userId"]; ?>;
         var idNews = $(".hiddenval").attr('value');
 
 
@@ -252,9 +253,27 @@ require "header.php";
                 } else
                     alert('Error: Check your comment length!');
             });
-            getAllComments(0, max);
+            getComments(0, max);
             getAllUserReactions();
         });
+
+        function removeComment(value) {
+            console.log(value);
+            $.ajax({
+                url: 'index.php',
+                method: 'POST',
+                dataType: 'text',
+                data: {
+                    removeComment: 1,
+                    commentID: value,
+                    userId: userId
+                },
+                success: function(response) {
+                    max--;
+                    window.location.reload();
+                }
+            });
+        }
 
         function getAllUserReactions() {
             $.ajax({
@@ -313,7 +332,7 @@ require "header.php";
             });
         }
 
-        function getAllComments(start, max) {
+        function getComments(start, max) {
             if (start > max) {
                 calcTimeAgo();
                 return;
@@ -324,12 +343,12 @@ require "header.php";
                 method: 'POST',
                 dataType: 'text',
                 data: {
-                    getAllComments: 1,
+                    getComments: 1,
                     start: start
                 },
                 success: function(response) {
                     $(".userComments").append(response);
-                    getAllComments((start + 20), max);
+                    getComments((start + 20), max);
                 }
             });
         }
@@ -343,9 +362,13 @@ require "header.php";
             window.emojiPicker.discover();
         });
 
-        function closeFunction(){
+        function closeFunction() {
             $('.replyRow').hide();
         }
+
+        $('.clickToShow').click(function() {
+            $('.comments').toggle();
+        });
     </script>
 </body>
 

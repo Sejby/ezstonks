@@ -25,6 +25,7 @@ function createCommentRow($data, $isReply = false)
                     <i class="fas fa-thumbs-up" data-isReply="' . $isReply . '" onclick="react(this,' . $data['id'] . ', \'up\')"></i>
                     <i class="fas fa-thumbs-down" data-isReply="' . $isReply . '" onclick="react(this,' . $data['id'] . ', \'down\')"></i>
                     <a href="javascript:void(0)" data-commentID="' . $data['id'] . '" onclick="reply(this)"><i class="fa-solid fa-reply"></i></a>
+                    <input type="button" value="' . $data['id'] . '" onclick="removeComment(this.value)" id="removeComment"><i class="fa-solid fa-xmark"></i>
                 </div>
                 <div class="replies">';
 
@@ -49,16 +50,32 @@ if (isset($_POST['getUserReactions'])) {
     exit(json_encode($reactions));
 }
 
-if (isset($_POST['getAllComments'])) {
+if (isset($_POST['getComments'])) {
     $start = $conn->real_escape_string($_POST['start']);
 
     $response = "";
     $sql = $conn->query("SELECT comments.id, uidUsers, comment, comments.createdOn FROM comments INNER JOIN users ON comments.userID = users.idUsers ORDER BY comments.id DESC LIMIT $start, 20");
-    while ($data = $sql->fetch_assoc())
+    while ($data = $sql->fetch_assoc()) {
         $response .= createCommentRow($data);
-
+    }
     exit($response);
 }
+
+if (isset($_POST["removeComment"])) {
+    if ($loggedIn == true) {
+        $commentID = $_POST["commentID"];
+        $userId = $_POST["userId"];
+
+        $sql = "DELETE FROM comments WHERE id ='$commentID' AND userID ='$userId'";
+        $res = $conn->query($sql);
+        echo $conn->error;
+        exit();
+    } else {
+        echo '<script type=text/javascript>alert("You must first register or login!")</script>';
+        exit();
+    }
+}
+
 
 if (isset($_POST['react'])) {
     if ($loggedIn == true) {
@@ -88,9 +105,6 @@ if (isset($_POST['addComment'])) {
         $isReply = $conn->real_escape_string($_POST['isReply']);
         $commentID = $conn->real_escape_string($_POST['commentID']);
         $idNews = $_POST["idNews"];
-
-
-
 
         if ($isReply != 'false') {
             $conn->query("INSERT INTO replies (comment, commentID, userID, createdOn) VALUES ('$comment', '$commentID', '" . $_SESSION['userId'] . "', NOW())");

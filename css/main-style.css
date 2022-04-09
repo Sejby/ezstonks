@@ -68,8 +68,7 @@ h1 {
 
 .datum {
   float: right;
-  margin-top: -20px;
-  font-size: 13px;
+  font-size: 12px;
   font-style: italic;
   padding-right: 10px;
 }
@@ -82,11 +81,11 @@ h1 {
 }
 
 .prispevek {
-  padding: 5px;
-  border: 1px solid black;
+  padding: 2px;
+  border: 1px solid rgb(20, 20, 20);
   background-color: white;
   color: black;
-  font-size: 14px;
+  font-size: 12px;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -95,17 +94,17 @@ h1 {
 
 .prispevek h1 {
   padding-bottom: 0;
-  padding-top: 5px;
+  padding-top: 2px;
   text-align: left;
-  font-size: 16px;
+  font-size: 13px;
   width: 80%;
   margin-left: 10px;
 }
 
 .prispevek p {
-  padding-top: 10px;
+  padding-top: 5px;
   text-align: left;
-  font-size: 14px;
+  font-size: 15px;
   font-style: italic;
 }
 
@@ -259,18 +258,17 @@ h1 {
   margin: 15px;
 }
 
-.jmenouzivatele {
+.nadpisPrispevku{
   width: 100%;
   padding-left: 15px;
-  padding-top: 5px;
   padding-bottom: 5px;
   border-bottom: 1px lightslategray solid;
   color: black;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
 }
 
-.textuzivatele {
+.textuzivatele{
   padding-left: 20px;
   padding-top: 5px;
   padding-right: 20px;
@@ -288,11 +286,9 @@ h1 {
 
 .autor {
   padding-left: 20px;
-  padding-top: 5px;
   font-size: 14px;
   color: #337ab7;
   font-style: italic;
-  font-weight: bold;
 }
 
 .label {
@@ -468,4 +464,8 @@ h1 {
 
 .emoji-picker{
   padding-right: 10px;
+}
+
+.comments{
+  display: none;
 }
