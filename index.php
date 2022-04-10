@@ -253,12 +253,15 @@ require "header.php";
                 } else
                     alert('Error: Check your comment length!');
             });
-            getComments(0, max);
+
+            poleID = document.getElementsByClassName('hiddenval');
+            console.log(poleID[1]);
+
+            getComments(0, max, poleID[0]);
             getAllUserReactions();
         });
 
         function removeComment(value) {
-            console.log(value);
             $.ajax({
                 url: 'index.php',
                 method: 'POST',
@@ -332,11 +335,13 @@ require "header.php";
             });
         }
 
-        function getComments(start, max) {
+        function getComments(start, max, element) {
             if (start > max) {
                 calcTimeAgo();
                 return;
             }
+
+            id = element.getAttribute('value');
 
             $.ajax({
                 url: 'index.php',
@@ -344,11 +349,12 @@ require "header.php";
                 dataType: 'text',
                 data: {
                     getComments: 1,
-                    start: start
+                    start: start,
+                    idZpravy: id
                 },
                 success: function(response) {
-                    $(".userComments").append(response);
-                    getComments((start + 20), max);
+                    $("#" + id).append(response);
+                  //  getComments((start + 20), max, element);
                 }
             });
         }
@@ -366,9 +372,13 @@ require "header.php";
             $('.replyRow').hide();
         }
 
-        $('.clickToShow').click(function() {
-            $('.comments').toggle();
-        });
+
+        function toggleComments(val) {
+            // console.log(val);
+            var id = val.getAttribute('data-id');
+            // console.log(id);
+            $('#' + id).toggle();
+        }
     </script>
 </body>
 

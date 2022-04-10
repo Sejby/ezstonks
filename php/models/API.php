@@ -55,22 +55,24 @@ class API extends DBH
     }
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $time = date("d/m/Y H:i", strtotime($data[0]["date"]));
-    echo '
+    for ($i = 0; $i < 2; $i++) {
+
+      $time = date("d/m/Y H:i", strtotime($data[$i]["date"]));
+      echo '
         <div class="zprava">
           <div class="obsah">
             <div class="wrapper">
-            <span class="label label-info">' . $data[0]["category"] . '</span>
-              <h1>' . $data[0]["nadpis"] . '</h1>
-              <img src="' . $data[0]["img_url"] . '">
-              <p class="text">' . $data[0]["text"] . '</p>
+            <span class="label label-info">' . $data[$i]["category"] . '</span>
+              <h1>' . $data[$i]["nadpis"] . '</h1>
+              <img src="' . $data[$i]["img_url"] . '">
+              <p class="text">' . $data[$i]["text"] . '</p>
               <p class="datum">Added on: ' . $time . '</p>
             </div>
           </div>
           <div class="commentSection">
-          <div class="show"><div class="clickToShow"><i class="fa-regular fa-comment"></i> Show discussion</div></div>   
-          <input type="hidden" value="' . $data[0]['id'] . '" class="hiddenval">        
-          <div class="comments">
+          <div class="show"><div class="clickToShow" data-id="' . $data[$i]['id'] . '" onclick="toggleComments(this)"><i class="fa-regular fa-comment"></i> Show discussion</div></div>   
+          <input type="hidden" value="' . $data[$i]['id'] . '" class="hiddenval">        
+          <div class="comments" id="' . $data[$i]['id'] . '">
           <div class="row">
               <div class="col-md-12">
                   <textarea class="form-control" id="mainComment" placeholder="Add Comment..." cols="30" rows="2" data-emojiable="true" data-emoji-input="unicode"></textarea>
@@ -78,7 +80,7 @@ class API extends DBH
               </div>
 
               <div class="col-md-12">
-                  <div class="userComments">
+                  <div class="userComments" id="' . $data[$i]['id'] . '">
                   </div>
                   <div class="row replyRow" style="display:none">
           <div class="col-md-12">
@@ -92,6 +94,7 @@ class API extends DBH
       </div>
           </div>
         </div>';
+    }
     $stmt = null;
   }
 

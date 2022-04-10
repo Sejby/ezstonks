@@ -51,10 +51,11 @@ if (isset($_POST['getUserReactions'])) {
 }
 
 if (isset($_POST['getComments'])) {
+    $idNews = $_POST["idZpravy"];
     $start = $conn->real_escape_string($_POST['start']);
 
     $response = "";
-    $sql = $conn->query("SELECT comments.id, uidUsers, comment, comments.createdOn FROM comments INNER JOIN users ON comments.userID = users.idUsers ORDER BY comments.id DESC LIMIT $start, 20");
+    $sql = $conn->query("SELECT comments.id, uidUsers, comment, comments.createdOn FROM comments INNER JOIN users ON comments.userID = users.idUsers WHERE idNews = '" . $idNews . "' ORDER BY comments.id DESC LIMIT $start, 20");
     while ($data = $sql->fetch_assoc()) {
         $response .= createCommentRow($data);
     }
