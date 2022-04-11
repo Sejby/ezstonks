@@ -214,10 +214,13 @@ require "header.php";
             $("#addComment, #addReply").on('click', function() {
                 var comment;
 
-                if (!isReply)
+                if (!isReply) {
                     comment = $("#mainComment").val();
-                else
+                    console.log(comment);
+                } else {
                     comment = $("#replyComment").val();
+                    console.log(comment);
+                }
 
                 if (comment.length > 3) {
                     $.ajax({
@@ -257,6 +260,7 @@ require "header.php";
             poleID = document.getElementsByClassName('hiddenval');
             console.log(poleID[1]);
 
+            getComments(0, max, poleID[1]);
             getComments(0, max, poleID[0]);
             getAllUserReactions();
         });
@@ -342,7 +346,6 @@ require "header.php";
             }
 
             id = element.getAttribute('value');
-
             $.ajax({
                 url: 'index.php',
                 method: 'POST',
@@ -353,8 +356,9 @@ require "header.php";
                     idZpravy: id
                 },
                 success: function(response) {
+                    console.log(response);
                     $("#" + id).append(response);
-                  //  getComments((start + 20), max, element);
+                    getComments((start + 20), max, element);
                 }
             });
         }
