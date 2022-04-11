@@ -1,4 +1,23 @@
 <?php
+include('Poll.php');
+$poll = new Poll();
+$pollData = $poll->getPoll();
+if (isset($_POST['vote'])) {
+    $pollVoteData = array(
+        'pollid' => $_POST['pollid'],
+        'pollOptions' => $_POST['options']
+    );
+    $isVoted = $poll->updateVote($pollVoteData);
+    if ($isVoted) {
+        setcookie($_POST['pollid'], 1, time() + 60 * 60 * 24 * 365);
+        $voteMessage = 'Your have voted successfully.';
+    } else {
+        $voteMessage = 'Your had already voted.';
+    }
+}
+?>
+
+<?php
 require "header.php";
 ?>
 
@@ -82,38 +101,31 @@ require "header.php";
     </div>
 
     <div class="ankety">
-        <div class="anketa">
-            <?php
-            echo '<h3>Do you think the stock market will go up in 2022?</h3>
-              <div class="progress">
-                  <form action="php/includes/anketa.inc.php">
-                      <button type="submit" name="anketa-submit">
-                          <div class="progress-bar progress-bar-striped bg-success" id="yespolly" role="progressbar" style="width: 22.3%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Yes</div>
-                      </button>
-                  </form>
-                  </div>
-              <div class="progress" style="height: 32px;">
-                  <div class="progress-bar progress-bar-striped bg-success" id="nopolly" role="progressbar" style="width: 72.4%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">No</div>
-              </div>';
-            ?>
-        </div>
+        <div class="contain">
 
-        <div class="anketa">
-            <?php
-            echo '<h3>Do you think the stock market will go up in 2022?</h3>
-              <div class="progress">
-                  <form action="php/includes/anketa.inc.php">
-                      <button type="submit" name="anketa-submit">
-                          <div class="progress-bar progress-bar-striped bg-success" id="yespolly" role="progressbar" style="width: 22.3%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Yes</div>
-                      </button>
-                  </form>
-                  </div>
-              <div class="progress">
-                  <div class="progress-bar progress-bar-striped bg-success" id="nopolly" role="progressbar" style="width: 72.4%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">No</div>
-              </div>';
-            ?>
+            <div class="poll-container">
+                <?php echo !empty($voteMessage) ? '<div class="alert alert-danger"><strong>Warning!</strong> ' . $voteMessage . '</div>' : ''; ?>
+                <form action="" method="post" name="pollFrm">
+                    <?php
+                    foreach ($pollData as $poll) {
+
+                        echo "<h3>" . $poll['question'] . "</h3>";
+                        $pollOptions = explode("||||", $poll['options']);
+                        echo "<ul>";
+                        for ($i = 0; $i < count($pollOptions); $i++) {
+                            echo '<li><input type="radio" name="options" value="' . $i . '" > ' . $pollOptions[$i] . '</li>';
+                        }
+                        echo "</ul>";
+                        echo '<input type="hidden" name="pollid" value="' . $poll['pollid'] . '">';
+                        echo '<br><input type="submit" name="vote" class="btn btn-primary" value="Vote">';
+                        echo '<a href="results.php"> View Results</a>';
+                    }
+                    ?>
+                </form>
+            </div>
         </div>
     </div>
+
 
     <div id="content">
         <?php
@@ -211,7 +223,7 @@ require "header.php";
 
 
         $(document).ready(function() {
-            $("#addComment, #addReply").on('click', function() {
+            $("#0, #0").on('click', function() {
                 var comment;
 
                 if (!isReply) {

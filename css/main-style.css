@@ -71,6 +71,7 @@ h1 {
   font-size: 12px;
   font-style: italic;
   padding-right: 10px;
+  margin-top: -20px;
 }
 
 #posts {
@@ -110,7 +111,7 @@ h1 {
 
 #content {
   margin-top: 20px;
-  margin-left: 8%;
+  margin-left: 5%;
   float: left;
   width: 40%;
   padding: 10px;
@@ -212,19 +213,16 @@ h1 {
   padding: 5px;
 }
 
-.anketa {
-  background-color: #003366;
-  color: white;
-  padding: 15px;
-  height: 15%;
-  margin-left: 15px;
-  border-radius: 2%;
-}
 .ankety {
   width: 20%;
   float: left;
-  margin-top: 6%;
+  margin-top: 2%;
+  margin-left: 2%;
   display: block;
+}
+
+.contain{
+  padding-bottom: 2%;
 }
 
 .progress {
