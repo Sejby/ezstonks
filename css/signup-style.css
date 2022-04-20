@@ -1,0 +1,71 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../img/1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: "Noto Sans", sans-serif;
+  text-align: center;
+  background-size: contain;
+}
+
+#registrdiv {
+  padding: 50px;
+  margin-top: 12%;
+  width: 18%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#registrdiv input {
+  display: block;
+  width: 250px;
+  padding: 20px;
+  margin-top: 15px;
+}
+
+#odkaz {
+  color: red;
+  display: block;
+  padding-left: 150px;
+  padding-top: 5px;
+  opacity: 1;
+  font-weight: bold;
+}
+
+#registrdiv button {
+  display: block;
+  width: 200px;
+  padding: 10px;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 10px;
+  font-size: 16px;
+}
+
+#registrdiv h1 {
+  color: white;
+}
+
+@media only screen and (max-width: 450px) {
+  #registrdiv {
+    padding: 50px;
+    margin-top: 12%;
+    width: 80%;
+    text-align: center;
+  }
+
+  #registrdiv input {
+    display: block;
+    width: 250px;
+    padding: 20px;
+    margin-top: 15px;
+  }
+
+  footer {
+    display: none;
+  }
+}
