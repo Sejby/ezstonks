@@ -18,16 +18,16 @@ function createCommentRow($data, $isReply = false)
         $isReply = 'no';
 
     $response = '
-            <div id="comment_' . $data['id'] . '" class="comment">
-                <div class="user">' . $data['uidUsers'] . ' <span class="time timeago" data-date="' . $data['createdOn'] . '"></span></div>
-                <div class="userComment">' . $data['comment'] . '</div>
-                <div class="reply">
-                    <i class="fas fa-thumbs-up" data-isReply="' . $isReply . '" onclick="react(this,' . $data['id'] . ', \'up\')"></i>
-                    <i class="fas fa-thumbs-down" data-isReply="' . $isReply . '" onclick="react(this,' . $data['id'] . ', \'down\')"></i>
-                    <a href="javascript:void(0)" data-commentID="' . $data['id'] . '" onclick="reply(this)"><i class="fa-solid fa-reply"></i></a>
-                    <input type="button" value="' . $data['id'] . '" onclick="removeComment(this.value)" id="removeComment"><i class="fa-solid fa-xmark"></i>
-                </div>
-                <div class="replies">';
+    <div id="comment_' . $data['id'] . '" class="comment">
+    <div class="user">' . $data['uidUsers'] . ' <span class="time timeago" data-date="' . $data['createdOn'] . '"></span></div>
+    <div class="userComment">' . $data['comment'] . '</div>
+    <div class="reply">
+        <i class="fas fa-thumbs-up" data-isReply="' . $isReply . '" onclick="react(this,' . $data['id'] . ', \'up\')"></i>
+        <i class="fas fa-thumbs-down" data-isReply="' . $isReply . '" onclick="react(this,' . $data['id'] . ', \'down\')"></i>
+        <a href="javascript:void(0)" data-commentID="' . $data['id'] . '" onclick="reply(this)"><i class="fa-solid fa-reply"></i></a>
+        <input type="button" value="' . $data['id'] . '" onclick="removeComment(this.value)" id="removeComment"><i class="fa-solid fa-xmark"></i>
+    </div>
+    <div class="replies">';
 
     $sql = $conn->query("SELECT replies.id, uidUsers, comment, replies.createdOn FROM replies INNER JOIN users ON replies.userID = users.idUsers WHERE replies.commentID = '" . $data['id'] . "' ORDER BY replies.id DESC LIMIT 1");
     while ($dataR = $sql->fetch_assoc())

@@ -9,7 +9,7 @@ if (isset($_POST['vote'])) {
     );
     $isVoted = $poll->updateVote($pollVoteData);
     if ($isVoted) {
-        setcookie($_POST['pollid'], 1, time() + 60 * 60 * 24 * 365);
+        setcookie($_POST['pollid'], 1, time() + 1 * 30);
         $voteMessage = 'Your have voted successfully.';
     } else {
         $voteMessage = 'Your had already voted.';
@@ -222,20 +222,21 @@ require "header.php";
                         } else {
                             echo '0';
                         } ?>;
-        var idNews = $(".hiddenval").attr('value');
+        // var idNews = $(".hiddenval").attr('value');
+        poleID = document.getElementsByClassName('hiddenval');
+        var idNews = $(poleID[0]).attr('value');
+
+        console.log(idNews);
 
 
         $(document).ready(function() {
-            $("#0, #0").on('click', function() {
+            $("#addComment, #addReply").on('click', function() {
                 var comment;
 
-                if (!isReply) {
+                if (!isReply)
                     comment = $("#mainComment").val();
-                    console.log(comment);
-                } else {
+                else
                     comment = $("#replyComment").val();
-                    console.log(comment);
-                }
 
                 if (comment.length > 3) {
                     $.ajax({
@@ -272,10 +273,6 @@ require "header.php";
                     alert('Error: Check your comment length!');
             });
 
-            poleID = document.getElementsByClassName('hiddenval');
-            console.log(poleID[1]);
-
-            getComments(0, max, poleID[1]);
             getComments(0, max, poleID[0]);
             getAllUserReactions();
         });

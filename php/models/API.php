@@ -56,44 +56,43 @@ class API extends DBH
 
     for ($i = 0; $i < 4; $i++) {
 
-      $time =  date("h:i d.m.Y", date($data[$i]["date"]));
+      $time =  date("h:ia d.m.Y", date($data[$i]["date"]));
 
       echo '
-        <div class="zprava">
-          <div class="obsah">
-            <div class="wrapper">
-            <span class="label label-info">' . $data[$i]["category"] . '</span>
-              <h1>' . $data[$i]["nadpis"] . '</h1>
-              <img src="' . $data[$i]["img_url"] . '">
-              <p class="text">' . $data[$i]["text"] . '</p>
-              <p class="datum">Added on: ' . $time . '</p>
-            </div>
-          </div>
-          <div class="commentSection">
-          <div class="show"><div class="clickToShow" data-id="' . $data[$i]['id'] . '" onclick="toggleComments(this)"><i class="fa-regular fa-comment"></i> Show discussion</div></div>   
-          <input type="hidden" value="' . $data[$i]['id'] . '" class="hiddenval">        
-          <div class="comments" id="' . $data[$i]['id'] . '">
-          <div class="row">
-              <div class="col-md-12">
-                  <textarea class="form-control" id="mainComment" placeholder="Add Comment..." cols="30" rows="2" data-emojiable="true" data-emoji-input="unicode"></textarea>
-                  <button style="float:right; margin-top: 10px;" class="btn-primary btn" onclick="isReply = false;" id="' . $i . '">Add Comment</button>
-              </div>
-
-              <div class="col-md-12">
-                  <div class="userComments" id="' . $data[$i]['id'] . '">
-                  </div>
-                  <div class="row" id="replyRow" style="display:none">
+      <div class="zprava">
+      <div class="obsah">
+        <div class="wrapper">
+        <span class="label label-info">' . $data[$i]["category"] . '</span>
+          <h1>' . $data[$i]["nadpis"] . '</h1>
+          <img src="' . $data[$i]["img_url"] . '">
+          <p class="text">' . $data[$i]["text"] . '</p>
+          <p class="datum">Added on: ' . $time . '</p>
+        </div>
+      </div>
+      <div class="commentSection">
+      <div class="show"><div class="clickToShow" data-id="' . $data[$i]['id'] . '" onclick="toggleComments(this)"><i class="fa-regular fa-comment"></i> Show discussion</div></div>   
+      <input type="hidden" value="' . $data[$i]['id'] . '" class="hiddenval">        
+      <div class="comments" id="' . $data[$i]['id'] . '">
+      <div class="row">
           <div class="col-md-12">
-              <textarea class="form-control" id="replyComment" placeholder="Add Public Comment" cols="30" rows="2" data-emojiable="true" data-emoji-input="unicode"></textarea>
-              <button style="float:right; margin-left: 5px;" class="btn-success btn" onclick="isReply = true;" id="addReply0">Add Reply</button>
-              <button style="float:right" class="btn-default btn" onclick="closeFunction()"> Close </button>
+              <textarea class="form-control" id="mainComment" placeholder="Add Comment..." cols="30" rows="2" data-emojiable="true" data-emoji-input="unicode"></textarea>
+              <button style="float:right; margin-top: 10px;" class="btn-primary btn" onclick="isReply = false;" id="addComment">Add Comment</button>
           </div>
-      </div>
+          <div class="col-md-12">
+              <div class="userComments" id="' . $data[$i]['id'] . '">
               </div>
+              <div class="row replyRow" style="display:none">
+      <div class="col-md-12">
+          <textarea class="form-control" id="replyComment" placeholder="Add Public Comment" cols="30" rows="2" data-emojiable="true" data-emoji-input="unicode"></textarea>
+          <button style="float:right; margin-left: 5px;" class="btn-success btn" onclick="isReply = true;" id="addReply">Add Reply</button>
+          <button style="float:right" class="btn-default btn" onclick="closeFunction()"> Close </button>
+      </div>
+  </div>
           </div>
       </div>
-          </div>
-        </div>';
+  </div>
+      </div>
+    </div>';
     }
     $stmt = null;
   }
