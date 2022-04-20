@@ -151,12 +151,12 @@ require "header.php";
         <div id="posts">
             <?php
             $mysqli = new mysqli('localhost', 'root', '', 'ezstonks');
-            $sql = "SELECT idPosts, idUsers, topic, postText, date FROM posty ORDER BY date DESC;";
+            $sql = "SELECT idPosts, idUsers, uidUsers, topic, postText, date FROM posty ORDER BY date DESC;";
             if ($stmt = $mysqli->prepare($sql)) {
                 if ($stmt->execute()) {
                     $stmt->store_result();
                     if ($stmt->num_rows > 0) {
-                        $stmt->bind_result($id, $user, $topic, $text, $date);
+                        $stmt->bind_result($id, $user, $username, $topic, $text, $date);
                         while ($row = $stmt->fetch()) {
                             echo '<div class="prispevek">';
                             echo '<div class="content">';
@@ -178,7 +178,7 @@ require "header.php";
                             echo '<h3 class="nadpisPrispevku">' . $topic . '</h3>
                         <p class="textuzivatele">' . $text . '</p>          
                         <h3 class="datum">Přidáno: ' . $date . '</h3>
-                        <h3 class="autor">Autor: ' . $user . '</h3>
+                        <h3 class="autor">Autor: ' . $username . '</h3>
                         </div>
                         </div>';
                         }
@@ -219,7 +219,7 @@ require "header.php";
             max = <?php echo $numComments ?>,
             userId = <?php if (isset($_SESSION["userId"])) {
                             echo $_SESSION["userId"];
-                        }else{
+                        } else {
                             echo '0';
                         } ?>;
         var idNews = $(".hiddenval").attr('value');
