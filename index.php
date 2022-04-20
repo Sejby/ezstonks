@@ -165,11 +165,11 @@ require "header.php";
                                     echo '
                         <div id="formystlacitkama">
                         <form method="post" action="changepost.php" id="formsbuttonama1">
-                        <button type="submit" name="zmenitPost" value=' . $id . ' class="btn btn-warning btn-sm" id="meniciTlacitko">Změnit</button>
+                        <button type="submit" name="zmenitPost" value=' . $id . ' class="btn btn-warning btn-sm" id="meniciTlacitko">Change</button>
                         </form>
                         
                         <form method="post" id="formsbuttonama2">
-                        <button type="submit" name="odstranitPost" value=' . $id . ' class="btn btn-danger btn-sm" id="odstranovaciTlacitko">Odstranit příspěvek</button>
+                        <button type="submit" name="odstranitPost" value=' . $id . ' class="btn btn-danger btn-sm" id="odstranovaciTlacitko">Delete Post</button>
                         </form>
                         </div>  
                         ';
@@ -177,8 +177,8 @@ require "header.php";
                             }
                             echo '<h3 class="nadpisPrispevku">' . $topic . '</h3>
                         <p class="textuzivatele">' . $text . '</p>          
-                        <h3 class="datum">Přidáno: ' . $date . '</h3>
-                        <h3 class="autor">Autor: ' . $username . '</h3>
+                        <h3 class="datum">Added on: ' . $date . '</h3>
+                        <h3 class="autor">Author: ' . $username . '</h3>
                         </div>
                         </div>';
                         }

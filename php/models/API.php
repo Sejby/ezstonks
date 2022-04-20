@@ -46,7 +46,7 @@ class API extends DBH
 
   public function getNewsFromDBH()
   {
-    $stmt = $this->connect()->prepare("SELECT * from news");
+    $stmt = $this->connect()->prepare("SELECT * from news ORDER BY date DESC");
     if (!$stmt->execute()) {
       $stmt = null;
       header("location: /ooppro/index.php?error=stmtfailed");
@@ -56,7 +56,7 @@ class API extends DBH
 
     for ($i = 0; $i < 4; $i++) {
 
-      $time =  date("h:i:sa d-m-Y", date($data[$i]["date"]));
+      $time =  date("h:i d.m.Y", date($data[$i]["date"]));
 
       echo '
         <div class="zprava">

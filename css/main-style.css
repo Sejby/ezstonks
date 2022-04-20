@@ -74,6 +74,10 @@ h1 {
   margin-top: -20px;
 }
 
+#posts .datum{
+  margin-top: 5px;
+}
+
 #posts {
   margin-top: 6%;
   width: 28%;
