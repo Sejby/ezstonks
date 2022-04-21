@@ -1,5 +1,6 @@
 <?php
-include('Poll.php');
+//include('Poll.php');
+/*
 $poll = new Poll();
 $pollData = $poll->getPoll();
 if (isset($_POST['vote'])) {
@@ -15,6 +16,7 @@ if (isset($_POST['vote'])) {
         $voteMessage = 'Your had already voted.';
     }
 }
+*/
 ?>
 
 <?php
@@ -195,205 +197,11 @@ require "header.php";
                 echo '<meta http-equiv="Refresh" content="0;' . $page . '">';
             }
             ?>
-
-
-        </div>
-
-        <div id="chat">
-            <div id="users" style="display: none;">
-                <div class="user">USER 1</div>
-            </div>
-            <p>Online messages</p>
         </div>
     </div>
 
-    <script src="emojilib/js/config.js"></script>
-    <script src="emojilib/js/util.js"></script>
-    <script src="emojilib/js/jquery.emojiarea.js"></script>
-    <script src="emojilib/js/emoji-picker.js"></script>
-    <script src="js/jquery.timeago.js"></script>
+
     <script src="js/API.js"></script>
-    <script type="text/javascript">
-        var isReply = false,
-            commentID = 0,
-            max = <?php echo $numComments ?>,
-            userId = <?php if (isset($_SESSION["userId"])) {
-                            echo $_SESSION["userId"];
-                        } else {
-                            echo '0';
-                        } ?>;
-        // var idNews = $(".hiddenval").attr('value');
-        poleID = document.getElementsByClassName('hiddenval');
-        var idNews = $(poleID[0]).attr('value');
-
-        console.log(idNews);
-
-
-        $(document).ready(function() {
-            $("#addComment, #addReply").on('click', function() {
-                var comment;
-
-                if (!isReply)
-                    comment = $("#mainComment").val();
-                else
-                    comment = $("#replyComment").val();
-
-                if (comment.length > 3) {
-                    $.ajax({
-                        url: 'index.php',
-                        method: 'POST',
-                        dataType: 'text',
-                        data: {
-                            addComment: 1,
-                            comment: comment,
-                            isReply: isReply,
-                            commentID: commentID,
-                            idNews: idNews
-                        },
-                        success: function(response) {
-                            max++;
-                            $("#numComments").text(max + " Comments");
-
-                            if (!isReply) {
-                                $(".userComments").prepend(response);
-                                $("#mainComment").val("");
-                                $('.emoji-wysiwyg-editor').empty();
-                            } else {
-                                commentID = 0;
-                                $("#replyComment").val("");
-                                $('.emoji-wysiwyg-editor').empty();
-                                $(".replyRow").hide();
-                                $('.replyRow').parent().next().prepend(response);
-                            }
-
-                            calcTimeAgo();
-                        }
-                    });
-                } else
-                    alert('Error: Check your comment length!');
-            });
-
-            getComments(0, max, poleID[0]);
-            getAllUserReactions();
-        });
-
-        function removeComment(value) {
-            $.ajax({
-                url: 'index.php',
-                method: 'POST',
-                dataType: 'text',
-                data: {
-                    removeComment: 1,
-                    commentID: value,
-                    userId: userId
-                },
-                success: function(response) {
-                    max--;
-                    window.location.reload();
-                }
-            });
-        }
-
-        function getAllUserReactions() {
-            $.ajax({
-                url: 'index.php',
-                method: 'POST',
-                dataType: 'json',
-                data: {
-                    getUserReactions: 1
-                },
-                success: function(response) {
-                    for (var i = 0; i < response.length; i++) {
-                        $('i[onclick="react(this,' + response[i].commentID + ', \'' + response[i].type + '\')"]').each(function() {
-                            if (response[i].isReply === $(this).attr('data-isReply'))
-                                $(this).css('color', 'blue');
-                        });
-                    }
-                }
-            });
-        }
-
-        function reply(caller) {
-            commentID = $(caller).attr('data-commentID');
-            $("#replyRow").insertAfter($(caller));
-            $('#replyRow').show();
-        }
-
-        function calcTimeAgo() {
-            $('.timeago').each(function() {
-                var timeAgo = $.timeago($(this).attr('data-date'));
-                $(this).text(timeAgo);
-                $(this).removeClass('timeago');
-            });
-        }
-
-        function react(caller, commentID, type) {
-            $.ajax({
-                url: 'index.php',
-                method: 'POST',
-                dataType: 'json',
-                data: {
-                    react: 1,
-                    commentID: commentID,
-                    type: type,
-                    isReply: $(caller).attr('data-isReply')
-                },
-                success: function(response) {
-                    if (response.status === 'updated') {
-                        if (type === 'up')
-                            $(caller).next().css('color', '');
-                        else
-                            $(caller).prev().css('color', '');
-                    }
-
-                    $(caller).css('color', 'blue');
-                }
-            });
-        }
-
-        function getComments(start, max, element) {
-            if (start > max) {
-                calcTimeAgo();
-                return;
-            }
-
-            id = element.getAttribute('value');
-            $.ajax({
-                url: 'index.php',
-                method: 'POST',
-                dataType: 'text',
-                data: {
-                    getComments: 1,
-                    start: start,
-                    idZpravy: id
-                },
-                success: function(response) {
-                    console.log(response);
-                    $("#" + id).append(response);
-                    getComments((start + 20), max, element);
-                }
-            });
-        }
-
-        $(function() {
-            window.emojiPicker = new EmojiPicker({
-                emojiable_selector: '[data-emojiable=true]',
-                assetsPath: 'emojilib/img/',
-                popupButtonClasses: 'fa fa-smile-o'
-            });
-            window.emojiPicker.discover();
-        });
-
-        function closeFunction() {
-            $('.replyRow').hide();
-        }
-
-
-        function toggleComments(val) {
-            var id = val.getAttribute('data-id');
-            $('#' + id).toggle();
-        }
-    </script>
 </body>
 
 <?php

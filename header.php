@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "./php/includes/addcomment.inc.php";
+require "./php/includes/addcomment.inc.php";
 ?>
 <!DOCTYPE html>
 <html lang="cs">

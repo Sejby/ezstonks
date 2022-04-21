@@ -1,0 +1,98 @@
+.container {
+  margin-top: 20px;
+  width: 40%;
+  font-size: 17px;
+}
+
+.comment {
+  margin-bottom: 20px;
+}
+
+.user {
+  font-weight: bold;
+  color: black;
+}
+
+.time,
+.reply {
+  color: gray;
+}
+
+.userComment {
+  color: #000;
+}
+
+.replies .comment {
+  margin-top: 20px;
+}
+
+.replies {
+  margin-left: 20px;
+}
+
+.fas {
+  margin-right: 10px;
+}
+
+#text {
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+  border-bottom: 1px solid black;
+  padding-left: 5%;
+  padding-top: 5%;
+}
+
+.emoji-picker {
+  padding-right: 10px;
+}
+
+#text h1 {
+  color: rgb(0, 117, 190);
+}
+
+#text h3 {
+  font-weight: bold;
+}
+
+#pridaniPrispevku {
+  background-color: white;
+  border-bottom: lightslategray 3px solid;
+  border-top: 0.5px solid black;
+  border-left: 0.5px solid black;
+  border-right: 0.5px solid black;
+  color: black;
+  font-size: 20px;
+  width: 100%;
+  height: 80px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px;
+}
+
+#pridaniPrispevkuTlacitko {
+  background-color: white;
+  border-bottom: lightslategray 3px solid;
+  border-top: 0.5px solid black;
+  border-left: 0.5px solid black;
+  border-right: 0.5px solid black;
+  color: black;
+  font-size: 20px;
+  width: 100%;
+  height: 80px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px;
+}
+
+#pridaniPrispevku h3 {
+  font-size: 20px !important;
+  padding: 5px;
+}
+
+#hlaska{
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 5%;
+}

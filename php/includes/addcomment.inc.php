@@ -123,5 +123,8 @@ if (isset($_POST['addComment'])) {
     }
 }
 
-$sqlNumComments = $conn->query("SELECT id FROM comments");
-$numComments = $sqlNumComments->num_rows;
+if (isset($_GET["id"])) {
+    $id = $_GET["id"];
+    $sqlNumComments = $conn->query("SELECT id FROM comments WHERE idNews = $id");
+    $numComments = $sqlNumComments->num_rows;
+}

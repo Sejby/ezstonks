@@ -1,4 +1,5 @@
 <?php
+/*
 class Poll
 {
 	private $host  = 'localhost';
@@ -12,7 +13,11 @@ class Poll
 	public function __construct()
 	{
 		if (!$this->dbConnect) {
-			$conn = new mysqli($this->host, $this->user, $this->password, $this->database);
+			try {
+				$conn = new mysqli($this->host, $this->user, $this->password, $this->database);
+			} catch (Exception $e) {
+				echo $e;
+			}
 			if ($conn->connect_error) {
 				die("Failed to connect with MySQL: " . $conn->connect_error);
 			} else {
@@ -63,3 +68,4 @@ class Poll
 		return true;
 	}
 }
+*/
