@@ -1,6 +1,6 @@
 <?php
-//include('Poll.php');
-/*
+include('Poll.php');
+
 $poll = new Poll();
 $pollData = $poll->getPoll();
 if (isset($_POST['vote'])) {
@@ -16,7 +16,7 @@ if (isset($_POST['vote'])) {
         $voteMessage = 'Your had already voted.';
     }
 }
-*/
+
 ?>
 
 <?php

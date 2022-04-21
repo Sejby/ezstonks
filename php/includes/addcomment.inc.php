@@ -6,7 +6,11 @@ if (isset($_SESSION['userId']) || isset($_SESSION['userUId'])) {
     $loggedIn = true;
 }
 
-$conn = new mysqli('localhost', 'root', '', 'ezstonks');
+try {
+    $conn = new mysqli('localhost', 'root', '', 'ezstonks');
+} catch (Exception $e) {
+    
+}
 
 function createCommentRow($data, $isReply = false)
 {

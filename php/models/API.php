@@ -75,7 +75,7 @@ class API extends DBH
         class="clickToShow"
         data-id="' . $data[$i]['id'] . '">
         <form action="./diskuze.php" method="post">
-        <a href="./diskuze.php?id=' . $data[$i]['id'] . '"><i class="fa-regular fa-comment"></i> Show discussion </a>
+        <a href="./diskuze.php?id=' . $data[$i]['id'] . '&headline= ' . $data[$i]['nadpis'] . '"><i class="fa-regular fa-comment"></i> Show discussion </a>
         <form>
       </div>
     </div>
